@@ -1,0 +1,22 @@
+# Copyright 2023 Salesforce, Inc. All rights reserved.
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: ApiInstance
+metadata:
+  name: open-ai-instance
+spec:
+  address: http://0.0.0.0:8081
+  services:
+    upstream:
+      address: https://api.openai.com/v1
+      routes:
+        - rules:
+            - path: .*
+          config:
+            destinationPath: /
+  policies:
+    - policyRef:
+        name: open-ai-key-v1-0-impl
+      config:
+        api_key:
+          - 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
